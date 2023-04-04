@@ -2,6 +2,7 @@ package model;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,7 +14,7 @@ public class RentInfoPage {
     public static final By  COMMENT_FIELD = By.xpath(".//input[@placeholder = 'Комментарий для курьера']");
     public static final By  ORDER_BUTTON = By.xpath(".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM']");
     public static final By CONFIRMATION_BUTTON = By.xpath(".//div[@class='Order_Buttons__1xGrp']/button[text()='Да']");
-    public static final By ORDER_DONE = By.xpath(".//div[@class = 'Order_Modal__YZ-d3']");
+    public static final By ORDER_DONE = By.xpath(".//div[text() = 'Заказ оформлен']");
     private final WebDriver driver;
     public RentInfoPage(WebDriver driver) {
         this.driver = driver;
@@ -39,6 +40,7 @@ public class RentInfoPage {
         driver.findElement(CONFIRMATION_BUTTON).click();
     }
     public boolean checkSuccessOfTheOrder() {
-        return driver.findElement(ORDER_DONE).isDisplayed();
+        WebElement orderIsDone = new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(ORDER_DONE));
+        return orderIsDone.isDisplayed();
     }
 }

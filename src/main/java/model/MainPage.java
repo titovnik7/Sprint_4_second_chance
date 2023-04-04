@@ -27,9 +27,15 @@ public class MainPage {
             driver.findElement(CREATE_ORDER_BUTTON_BOTTOM).click();
         }
     }
-    public void checkQuestionAndAnswer(String question) {
+    /*public void checkQuestionAndAnswer(String question) {
         WebElement element = driver.findElement(By.xpath(".//div[@class='Home_FourPart__1uthg']"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         driver.findElement(By.xpath("//div[text()='" + question + "']")).click();
+    }*/
+    public void checkAnswer(String number) {
+        WebElement element = driver.findElement(By.xpath(".//div[@class='Home_FourPart__1uthg']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        driver.findElement(By.id("accordion__heading-" + number)).click();
+        driver.findElement(By.id("accordion__panel-" + number)).isDisplayed();
     }
 }
